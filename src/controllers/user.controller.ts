@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt';
 import { FolderRequest } from '../types/request';
 
 // Registrar usuario
-export const registerUser = async (req: FolderRequest, res: Response) => {
+export const registerUser = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
-  const profilePhoto = req.file ? `/uploads/${req.folder}/${req.file.filename}` : null; // Usa req.folder
+  const profilePhoto = req.file ? `/uploads/${req.file.filename}` : null; // Ruta directa a 'uploads'
 
   try {
     // Validar datos
@@ -67,10 +67,10 @@ export const showUser = async (req: Request<{ id: string }>, res: Response) => {
 };
 
 // Actualizar usuario
-export const updateUser = async (req: FolderRequest, res: Response) => {
+export const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, email, password } = req.body;
-  const profilePhoto = req.file ? `/uploads/${req.folder}/${req.file.filename}` : undefined;
+  const profilePhoto = req.file ? `/uploads/${req.file.filename}` : undefined;
 
   try {
     // Verificar si el usuario existe

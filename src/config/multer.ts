@@ -1,20 +1,18 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import { FolderRequest } from '../types/request'; // Importa el tipo extendido
 
 // Configuración de almacenamiento dinámico
 const storage = multer.diskStorage({
-  destination: (req: FolderRequest, _file, cb) => {
-    const folder = req.folder || 'default'; // Usa la carpeta definida en el middleware o una predeterminada
-    const uploadPath = path.join(__dirname, '../../uploads', folder);
+  destination: (_req, _file, cb) => {
+    const uploadPath = path.join(__dirname, '../../uploads'); // Carpeta fija 'uploads'
 
     // Crear la carpeta si no existe
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });
     }
 
-    cb(null, uploadPath); // Guardar el archivo en la subcarpeta
+    cb(null, uploadPath); // Guardar el archivo en la carpeta 'uploads'
   },
   filename: (_req, file, cb) => {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;

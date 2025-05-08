@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes';
+import productRoutes from './routes/product.routes'; // Importar las rutas de productos
 import path from 'path';
 import { loggerMiddleware } from './middlewares/logger.middleware'; // Importar el middleware
 import cors from 'cors';
@@ -21,6 +22,9 @@ app.use(loggerMiddleware);
 
 // Registrar las rutas de usuario
 app.use('/users', userRoutes);
+
+// Registrar las rutas de productos
+app.use('/products', productRoutes);
 
 // Servir la carpeta uploads como estática
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
