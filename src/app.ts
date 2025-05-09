@@ -4,6 +4,7 @@ import userRoutes from './routes/user.routes';
 import productRoutes from './routes/product.routes'; // Importar las rutas de productos
 import path from 'path';
 import { loggerMiddleware } from './middlewares/logger.middleware'; // Importar el middleware
+import paymentRoutes from "./routes/payment.routes";
 import cors from 'cors';
 
 // Cargar variables de entorno
@@ -28,6 +29,8 @@ app.use('/products', productRoutes);
 
 // Servir la carpeta uploads como estática
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+app.use("/api/paypal", paymentRoutes); // <--- Esto agrega el endpoint 
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
