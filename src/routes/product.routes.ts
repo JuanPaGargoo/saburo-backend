@@ -25,5 +25,6 @@ router.patch(
 );
 router.delete('/deleteProduct/:id', ProductController.deleteProduct);
 router.get('/getProduct/:id', ProductController.getProductById);
+router.get('/search', ProductController.searchProducts);
 
 export default router;
