@@ -6,6 +6,7 @@ import path from 'path';
 import { loggerMiddleware } from './middlewares/logger.middleware'; // Importar el middleware
 import paymentRoutes from "./routes/payment.routes";
 import cors from 'cors';
+import commentRoutes from "./routes/comment.routes";
 
 // Cargar variables de entorno
 dotenv.config();
@@ -31,6 +32,9 @@ app.use('/products', productRoutes);
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 app.use("/api/paypal", paymentRoutes); // <--- Esto agrega el endpoint 
+
+// Rutas de comentarios
+app.use("/comments", commentRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
