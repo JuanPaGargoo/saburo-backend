@@ -40,8 +40,8 @@ export const createOrder = async (req: Request, res: Response) => {
           },
         ],
         application_context: {
-          return_url: "http://localhost:5173/payment-success",
-          cancel_url: "http://localhost:5173/payment-cancel",
+          return_url: "http://localhost:5173/?success=true",
+          cancel_url: "http://localhost:5173/?error=true",
         },
       },
       {
