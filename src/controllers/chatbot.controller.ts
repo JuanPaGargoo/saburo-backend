@@ -164,6 +164,10 @@ export class ChatbotController {
               - XL: peso mayor a 75 kg y estatura mayor a 1.80 m.
           Mensaje del usuario: "${message}".
           Responde con las tallas estimadas para la parte de arriba y la parte de abajo, junto con una breve explicación.
+          Si el usuario no aporta informacion muestrale las tallas de cada genero y una breve explicacion de como funcionan las tallas.
+          Si el usuario indica estatura y peso, pero no género, muestra ambos generos.
+          Si el usuario indica estatura o peso, y genero, muestra solo el género indicado.
+          Si el usuario solo indica género, muestra las tallas para ese género.
           El texto de respuesta debe ser claro y fácil de entender y no debe ser más largo de 3 oraciones.
         `;
         const response = await askOpenAI(prompt);
