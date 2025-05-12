@@ -33,11 +33,21 @@ export class ChatbotController {
         "sugerir",
         "que me recomiendas",
         "que sugieres",
-        "mujer",
-        "hombre",
         "precio",
         "descuento",
         "barato",
+        "económico",
+        "oferta",
+        "rebaja",
+        "rebajas",
+        "color",
+        "quiero",
+        "busco",
+        "me gustaría",
+        "me gustaría ver",
+        "me gustaría comprar",
+        "me gustaría encontrar",
+        "necesito",
       ];
 
       const isRecommendation = recommendationKeywords.some((keyword) =>
@@ -76,7 +86,9 @@ export class ChatbotController {
           Si no menciona nada específico, selecciona 3 prendas al azar.
           Responde primero con un estas son las prendas que te recomiendo o algo por el estilo y luego una lista en formato 1. primer producto salto de linea 2. segundo producto.
           luego un breve texto de por que escogiste esas prendas.
+          Si solo hay una prenda o dos, que concuerden con la busqueda, no es nesesario tener que poner 3.
           El texto de respuesta debe ser claro y fácil de entender y no debe ser más largo de 2 oraciones por producto.
+          si vez que solo uno o dos pro
         `;
 
         // Generar la primera respuesta
@@ -119,7 +131,12 @@ export class ChatbotController {
       }
 
       // Verificar si el mensaje está relacionado con tallas
-      if (message.toLowerCase().includes("talla")) {
+      if (
+        message.toLowerCase().includes("talla") ||
+        /mido\s\d+(\.\d+)?\s?(cm|m)/i.test(message) || // Detectar altura
+        /peso\s\d+(\.\d+)?\s?kg/i.test(message) || // Detectar peso
+        /soy\s(hombre|mujer)/i.test(message) // Detectar género
+      ) {
         const prompt = `
           Basándote en los datos proporcionados por el usuario, como peso, estatura y género, determina la talla adecuada para la parte de arriba (camisetas, camisas, etc.) y la parte de abajo (pantalones, faldas, etc.).
           Reglas:
